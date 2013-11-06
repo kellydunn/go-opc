@@ -28,10 +28,11 @@ func main {
      s.RegisterDevice(r)
 
      // Listen for incoming messages and serve them accordingly
-     go s.ListenOnPort("tcp", "8166")
+     go s.ListenOnPort("tcp", "7890")
+     go s.Process()
 
      // Create a client
-     c := opc.NewClient("tcp", "localhost:8166")
+     c := opc.NewClient("tcp", "localhost:7890")
 
      // Make a message!
      // This creates a message to send on channel 0
@@ -39,7 +40,7 @@ func main {
      m := opc.NewMessage(0)  
 
      // Set pixel #1 to white.
-     m.SetPixelColors(1, 255, 255, 255) 
+     m.SetPixelColors(1, 255, 255, 255)
      
      // Send the message!
      c.Send(m)
