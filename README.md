@@ -15,7 +15,7 @@ A golang implementation of the Open Pixel Control protocol.
 
 ## open pixel control
 
-Open Pixel Control is a protocol 
+Open Pixel Control is a protocol that is used to control arrays of RGB lights like Total Control Lighting (http://www.coolneon.com/) and Fadecandy devices (https://github.com/scanlime/fadecandy).
 
 ## documentation
 
@@ -85,6 +85,8 @@ func (d *DummyDevice) Channel() uint8 {
      return channel
 }
 ```
+
+Here's a video of `go-opc` interacting with the default OPC client provided by openpixelcontrol.org : (https://vine.co/v/hIqiZewthIh)
 
 ## related work
 
