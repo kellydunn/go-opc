@@ -1,11 +1,11 @@
 package opc
 
 import (
-	"net"
 	_ "fmt"
+	"net"
 )
 
-// This struct describes an OPC server, 
+// This struct describes an OPC server,
 // which keeps track of all connected OPC devices
 // as well as a channel of incoming messages from all connected clients
 type Server struct {
@@ -48,8 +48,8 @@ func (s *Server) ListenOnPort(protocol string, port string) {
 	}
 }
 
-// Reads off OPC messages from the passed in connection 
-// until the connection breaks.  
+// Reads off OPC messages from the passed in connection
+// until the connection breaks.
 // Appends all valid messages onto the message channel
 func (s *Server) handleConn(conn net.Conn) {
 	for {
@@ -95,9 +95,9 @@ func (s *Server) readOpc(conn net.Conn) (*Message, error) {
 		case 4:
 			m.lowLen = buf[0]
 		default:
-			m.data[bytesRead - 5] = buf[0]
-			
-			if bytesRead - 4 == m.Length() {
+			m.data[bytesRead-5] = buf[0]
+
+			if bytesRead-4 == m.Length() {
 				m.data = m.data[:m.Length()]
 			}
 		}

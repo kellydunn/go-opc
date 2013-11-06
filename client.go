@@ -4,7 +4,7 @@ import (
 	"net"
 )
 
-// This struct represents an OPC client 
+// This struct represents an OPC client
 // which is used to send OPC messages to an OPC server.
 type Client struct {
 	conn net.Conn
@@ -15,8 +15,8 @@ func NewClient() *Client {
 	return &Client{}
 }
 
-// Connects the client to a server specified by 
-// the protocol string of either 'tcp' or 'udp', and the host location, 
+// Connects the client to a server specified by
+// the protocol string of either 'tcp' or 'udp', and the host location,
 // which is a single string in the `url:port` format.
 func (c *Client) Connect(protocol string, host string) error {
 	conn, err := net.Dial(protocol, host)
