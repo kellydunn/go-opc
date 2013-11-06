@@ -13,6 +13,10 @@
 
 A golang implementation of the Open Pixel Control protocol.
 
+## documentation
+
+You can read the documentation here: (http://godoc.org/github.com/kellydunn/go-opc)
+
 ## usage
 
 ```
