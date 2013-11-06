@@ -8,10 +8,14 @@
    \_/__/                           \/_/         
 
 ```
-
+[![Build Status](https://travis-ci.org/kellydunn/go-opc.png)](https://travis-ci.org/kellydunn/go-opc)
 ## what
 
 A golang implementation of the Open Pixel Control protocol.
+
+## open pixel control
+
+Open Pixel Control is a protocol 
 
 ## documentation
 
