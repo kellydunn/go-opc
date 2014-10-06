@@ -44,12 +44,12 @@ func TestSetPixelColor(t *testing.T) {
 
 func TestSetLength(t *testing.T) {
 	m := NewMessage(0)
-	m.setLength(10)
+	m.SetLength(10)
 	if uint64(m.lowLen) != uint64(10) {
 		t.Errorf("Expected a call to SetLength() to set the Message length to 10.")
 	}
 
-	m.setLength(uint16(MAX_MESSAGE_SIZE))
+	m.SetLength(uint16(MAX_MESSAGE_SIZE))
 	if m.Length() != uint16(MAX_MESSAGE_SIZE) {
 		t.Errorf("Expected setting length to MAX_MESSAGE_SIZE to be reflected correctly.")
 	}
@@ -71,7 +71,7 @@ func TestIsValid(t *testing.T) {
 	}
 
 	m.data = make([]byte, 9)
-	m.setLength(9)
+	m.SetLength(9)
 
 	if !m.IsValid() {
 		t.Errorf("A Message should not be invalid after inserting data into its byte array and explicitly setting its length")
@@ -93,7 +93,7 @@ func TestIsBroadcast(t *testing.T) {
 func TestByteArray(t *testing.T) {
 	m := NewMessage(255)
 	m.SetPixelColor(0, 1, 2, 3)
-	m.setLength(3)
+	m.SetLength(3)
 
 	data := m.ByteArray()
 	if bytes.Compare(data, []byte{255, 0, 0, 3, 1, 2, 3}) != 0 {
