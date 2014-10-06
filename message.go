@@ -45,7 +45,7 @@ func (m *Message) SystemExclusive(systemId []byte, data []byte) {
 
 // Sets the length of this message by splitting
 // the passed in length into high and low length bytes.
-func (m *Message) setLength(length uint16) {
+func (m *Message) SetLength(length uint16) {
 	m.highLen = byte(length >> 8)
 	m.lowLen = byte(length)
 }
