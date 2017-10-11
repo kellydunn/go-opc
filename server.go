@@ -10,6 +10,7 @@ import (
 type Server struct {
 	Devs     map[uint8]Device
 	Messages chan *Message
+	Listener net.Listener
 }
 
 // NewServer creates and returns a new opc.Server.
@@ -36,6 +37,8 @@ func (s *Server) ListenOnPort(protocol string, port string) {
 	if listenerErr != nil {
 		panic(listenerErr)
 	}
+
+	s.Listener = listener
 
 	for {
 		conn, connErr := listener.Accept()
