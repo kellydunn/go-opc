@@ -8,24 +8,24 @@ import (
 // which keeps track of all connected OPC devices
 // as well as a channel of incoming messages from all connected clients
 type Server struct {
-	devs     map[uint8]Device
-	messages chan *Message
+	Devs     map[uint8]Device
+	Messages chan *Message
 }
 
 // NewServer creates and returns a new opc.Server.
 // Accepts a list of usb product IDs in which to send opc messages to.
 func NewServer() *Server {
-	return &Server{devs: make(map[uint8]Device), messages: make(chan *Message)}
+	return &Server{Devs: make(map[uint8]Device), Messages: make(chan *Message)}
 }
 
 // RegisterDevice registers the passed in device to the OPC server
 func (s *Server) RegisterDevice(dev Device) {
-	s.devs[dev.Channel()] = dev
+	s.Devs[dev.Channel()] = dev
 }
 
 // UnregisterDevice unregisters the passed in device from the OPC server
 func (s *Server) UnregisterDevice(dev Device) {
-	delete(s.devs, dev.Channel())
+	delete(s.Devs, dev.Channel())
 }
 
 // ListenOnPort listens on the passed in port with the passed in protocol,
@@ -62,7 +62,7 @@ func (s *Server) HandleConn(conn net.Conn) {
 			break
 		}
 
-		s.messages <- msg
+		s.Messages <- msg
 	}
 }
 
@@ -114,20 +114,20 @@ func ReadOpc(conn net.Conn) (*Message, error) {
 func (s *Server) Dispatch(m *Message) {
 	if m.IsBroadcast() {
 		// Broadcast the message to all registered devices
-		for i := range s.devs {
-			s.devs[i].Write(m)
+		for i := range s.Devs {
+			s.Devs[i].Write(m)
 		}
 
 	} else {
 		// Otherwise write to the device specified by the message's channel
-		s.devs[m.channel].Write(m)
+		s.Devs[m.channel].Write(m)
 	}
 }
 
 // Process processes all pending messages indefinitely.
 func (s *Server) Process() {
 	for {
-		msg := <-s.messages
+		msg := <-s.Messages
 		s.Dispatch(msg)
 	}
 }

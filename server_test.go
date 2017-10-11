@@ -48,7 +48,7 @@ func TestRegisterDevice(t *testing.T) {
 	d := &MockDevice{channel: 1}
 	s.RegisterDevice(d)
 
-	if _, ok := s.devs[d.Channel()]; !ok {
+	if _, ok := s.Devs[d.Channel()]; !ok {
 		t.Errorf("Expected Device to be registered")
 	}
 }
@@ -59,7 +59,7 @@ func TestUnregisterDevice(t *testing.T) {
 	s.RegisterDevice(d)
 	s.UnregisterDevice(d)
 
-	if _, ok := s.devs[d.Channel()]; ok {
+	if _, ok := s.Devs[d.Channel()]; ok {
 		t.Errorf("Expected Device to be unregistered after registering it")
 	}
 }
