@@ -1,7 +1,6 @@
 package opc
 
 import (
-	_ "fmt"
 	"net"
 )
 
@@ -121,7 +120,6 @@ func (s *Server) Dispatch(m *Message) {
 
 	} else {
 		// Otherwise write to the device specified by the message's channel
-		//fmt.Printf("Attempting to write to device at channel:%d\n", m.channel)
 		s.devs[m.channel].Write(m)
 	}
 }
