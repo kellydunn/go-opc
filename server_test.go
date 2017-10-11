@@ -65,12 +65,10 @@ func TestUnregisterDevice(t *testing.T) {
 }
 
 func TestReadOpc(t *testing.T) {
-	s := NewServer()
-
 	payload := []byte{255, 0, 0, 3, 1, 2, 3}
 	m := &MockConn{payload: payload}
 
-	msg, err := s.readOpc(m)
+	msg, err := ReadOpc(m)
 	if err != nil {
 		t.Errorf("Encountered an error when reading a valid Message")
 	}
