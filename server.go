@@ -86,18 +86,18 @@ func ReadOpc(conn net.Conn) (*Message, error) {
 		// Ignore first 4 bytes to account for HEADER_BYTES
 		switch bytesRead {
 		case 1:
-			m.channel = buf[0]
+			m.Channel = buf[0]
 		case 2:
-			m.command = buf[0]
+			m.Command = buf[0]
 		case 3:
-			m.highLen = buf[0]
+			m.HighLen = buf[0]
 		case 4:
-			m.lowLen = buf[0]
+			m.LowLen = buf[0]
 		default:
-			m.data[bytesRead-5] = buf[0]
+			m.Data[bytesRead-5] = buf[0]
 
 			if bytesRead-4 == m.Length() {
-				m.data = m.data[:m.Length()]
+				m.Data = m.Data[:m.Length()]
 			}
 		}
 	}
@@ -120,7 +120,7 @@ func (s *Server) Dispatch(m *Message) {
 
 	} else {
 		// Otherwise write to the device specified by the message's channel
-		s.Devs[m.channel].Write(m)
+		s.Devs[m.Channel].Write(m)
 	}
 }
 
