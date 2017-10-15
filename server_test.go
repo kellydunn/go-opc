@@ -48,7 +48,7 @@ func TestRegisterDevice(t *testing.T) {
 	d := &MockDevice{channel: 1}
 	s.RegisterDevice(d)
 
-	if _, ok := s.devs[d.Channel()]; !ok {
+	if _, ok := s.Devs[d.Channel()]; !ok {
 		t.Errorf("Expected Device to be registered")
 	}
 }
@@ -59,18 +59,16 @@ func TestUnregisterDevice(t *testing.T) {
 	s.RegisterDevice(d)
 	s.UnregisterDevice(d)
 
-	if _, ok := s.devs[d.Channel()]; ok {
+	if _, ok := s.Devs[d.Channel()]; ok {
 		t.Errorf("Expected Device to be unregistered after registering it")
 	}
 }
 
 func TestReadOpc(t *testing.T) {
-	s := NewServer()
-
 	payload := []byte{255, 0, 0, 3, 1, 2, 3}
 	m := &MockConn{payload: payload}
 
-	msg, err := s.readOpc(m)
+	msg, err := ReadOpc(m)
 	if err != nil {
 		t.Errorf("Encountered an error when reading a valid Message")
 	}
